@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@mipmap/bg_offline_game_foreground"
+    tools:context=".OfflineGameActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_weight="2">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/bg_rounded_blue"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textSize="19sp"
+                    android:textColor="@color/white"
+                    android:gravity="center"
+                    android:textAlignment="center"
+                    android:text="First\nPlayer (O)" />
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/p0Img"
+                    android:src="@mipmap/bg_you_in_army"
+                    android:layout_weight="1" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/bg_rounded_blue"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textSize="19sp"
+                    android:textColor="@color/white"
+                    android:gravity="center"
+                    android:textAlignment="center"
+                    android:text="Second\nPlayer (X)" />
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/p1Img"
+                    android:src="@mipmap/bg_no_no"
+                    android:layout_weight="1" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@drawable/bg_rounded_grey"
+            android:layout_margin="5dp"
+            android:layout_weight="1">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="10dp">
+                <TextView
+                    android:id="@+id/square0"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginStart="-5dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@drawable/bg_rounded_blue"
+                    android:gravity="center"
+                    android:text="X"
+                    android:textAlignment="center"
+                    android:textSize="60sp" />
+                <TextView
+                    android:id="@+id/square1"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/bg_rounded_blue"
+                    android:gravity="center"
+                    android:text="X"
+                    android:textAlignment="center"
+                    android:textSize="60sp" />
+                <TextView
+                    android:id="@+id/square2"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@drawable/bg_rounded_blue"
+                    android:gravity="center"
+                    android:text="X"
+                    android:textAlignment="center"
+                    android:textSize="60sp" />
+                <!--                <ImageView-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="match_parent"-->
+                <!--                    android:src="@mipmap/emptiness_foreground"-->
+                <!--                    android:id="@+id/square0"-->
+                <!--                    android:layout_marginTop="10dp"-->
+                <!--                    android:layout_marginStart="10dp"-->
+                <!--                    android:layout_marginEnd="10dp"-->
+                <!--                    android:layout_marginBottom="5dp"-->
+                <!--                    android:layout_weight="1" />-->
+                <!--                <ImageView-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="match_parent"-->
+                <!--                    android:src="@mipmap/emptiness_foreground"-->
+                <!--                    android:id="@+id/square1"-->
+                <!--                    android:layout_marginTop="10dp"-->
+                <!--                    android:layout_marginStart="10dp"-->
+                <!--                    android:layout_marginEnd="10dp"-->
+                <!--                    android:layout_marginBottom="5dp"-->
+                <!--                    android:layout_weight="1" />-->
+                <!--                <ImageView-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="match_parent"-->
+                <!--                    android:src="@mipmap/emptiness_foreground"-->
+                <!--                    android:id="@+id/square2"-->
+                <!--                    android:layout_marginTop="10dp"-->
+                <!--                    android:layout_marginStart="10dp"-->
+                <!--                    android:layout_marginEnd="10dp"-->
+                <!--                    android:layout_marginBottom="5dp"-->
+                <!--                    android:layout_weight="1" />-->
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="10dp">
+                <TextView
+                    android:id="@+id/square3"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginStart="-5dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@drawable/bg_rounded_blue"
+                    android:gravity="center"
+                    android:text="X"
+                    android:textAlignment="center"
+                    android:textSize="60sp" />
+                <TextView
+                    android:id="@+id/square4"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/bg_rounded_blue"
+                    android:gravity="center"
+                    android:text="X"
+                    android:textAlignment="center"
+                    android:textSize="60sp" />
+                <TextView
+                    android:id="@+id/square5"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@drawable/bg_rounded_blue"
+                    android:gravity="center"
+                    android:text="X"
+                    android:textAlignment="center"
+                    android:textSize="60sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="10dp">
+                <TextView
+                    android:id="@+id/square6"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginStart="-5dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@drawable/bg_rounded_blue"
+                    android:gravity="center"
+                    android:text="X"
+                    android:textAlignment="center"
+                    android:textSize="60sp" />
+                <TextView
+                    android:id="@+id/square7"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/bg_rounded_blue"
+                    android:gravity="center"
+                    android:text="X"
+                    android:textAlignment="center"
+                    android:textSize="60sp" />
+                <TextView
+                    android:id="@+id/square8"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@drawable/bg_rounded_blue"
+                    android:gravity="center"
+                    android:text="X"
+                    android:textAlignment="center"
+                    android:textSize="60sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    android:background="@mipmap/bg_offline_game_foreground"-->
+<!--    tools:context=".OfflineGameActivity">-->
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:orientation="vertical">-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_weight="2">-->
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_weight="2"-->
+<!--                android:layout_margin="20dp"-->
+<!--                android:background="@drawable/bg_rounded_blue"-->
+<!--                android:orientation="vertical">-->
+<!--                <TextView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:textSize="30sp"-->
+<!--                    android:textColor="@color/white"-->
+<!--                    android:gravity="center"-->
+<!--                    android:textAlignment="center"-->
+<!--                    android:text="First\nPlayer (O)" />-->
+<!--                <ImageView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:id="@+id/p0Img"-->
+<!--                    android:src="@mipmap/bg_you_in_army"-->
+<!--                    android:layout_weight="1" />-->
+<!--            </LinearLayout>-->
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_weight="2"-->
+<!--                android:layout_margin="20dp"-->
+<!--                android:background="@drawable/bg_rounded_blue"-->
+<!--                android:orientation="vertical">-->
+<!--                <TextView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:textSize="30sp"-->
+<!--                    android:textColor="@color/white"-->
+<!--                    android:gravity="center"-->
+<!--                    android:textAlignment="center"-->
+<!--                    android:text="Second Player (X)" />-->
+<!--                <ImageView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:id="@+id/p1Img"-->
+<!--                    android:src="@mipmap/bg_no_no_foreground"-->
+<!--                    android:layout_weight="1" />-->
+<!--            </LinearLayout>-->
+<!--        </LinearLayout>-->
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:orientation="vertical"-->
+<!--            android:background="@drawable/bg_rounded_grey"-->
+<!--            android:layout_margin="5dp"-->
+<!--            android:layout_weight="1">-->
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_weight="1"-->
+<!--                android:padding="10dp">-->
+<!--                <ImageView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:src="@mipmap/emptiness_foreground"-->
+<!--                    android:id="@+id/square0"-->
+<!--                    android:layout_margin="10dp"-->
+<!--                    android:layout_weight="1" />-->
+<!--                <ImageView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:src="@mipmap/emptiness_foreground"-->
+<!--                    android:id="@+id/square1"-->
+<!--                    android:layout_margin="10dp"-->
+<!--                    android:layout_weight="1" />-->
+<!--                <ImageView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:src="@mipmap/emptiness_foreground"-->
+<!--                    android:id="@+id/square2"-->
+<!--                    android:layout_margin="10dp"-->
+<!--                    android:layout_weight="1" />-->
+<!--            </LinearLayout>-->
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_weight="1"-->
+<!--                android:padding="10dp">-->
+<!--                <ImageView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:src="@mipmap/emptiness_foreground"-->
+<!--                    android:id="@+id/square3"-->
+<!--                    android:layout_margin="10dp"-->
+<!--                    android:layout_weight="1" />-->
+<!--                <ImageView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:src="@mipmap/emptiness_foreground"-->
+<!--                    android:id="@+id/square4"-->
+<!--                    android:layout_margin="10dp"-->
+<!--                    android:layout_weight="1" />-->
+<!--                <ImageView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:src="@mipmap/emptiness_foreground"-->
+<!--                    android:id="@+id/square5"-->
+<!--                    android:layout_margin="10dp"-->
+<!--                    android:layout_weight="1" />-->
+<!--            </LinearLayout>-->
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_weight="1"-->
+<!--                android:padding="10dp">-->
+<!--                <ImageView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:src="@mipmap/emptiness_foreground"-->
+<!--                    android:id="@+id/square6"-->
+<!--                    android:layout_margin="10dp"-->
+<!--                    android:layout_weight="1" />-->
+<!--                <ImageView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:src="@mipmap/emptiness_foreground"-->
+<!--                    android:id="@+id/square7"-->
+<!--                    android:layout_margin="10dp"-->
+<!--                    android:layout_weight="1" />-->
+<!--                <ImageView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:src="@mipmap/emptiness_foreground"-->
+<!--                    android:id="@+id/square8"-->
+<!--                    android:layout_margin="10dp"-->
+<!--                    android:layout_weight="1" />-->
+<!--            </LinearLayout>-->
+<!--        </LinearLayout>-->
+<!--    </LinearLayout>-->
+<!--</androidx.constraintlayout.widget.ConstraintLayout>-->

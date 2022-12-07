@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "689674668259",
+    "project_id": "pai-fillo-nai",
+    "storage_bucket": "pai-fillo-nai.appspot.com",
+    "firebase_url": "https://pai-fillo-nai-default-rtdb.europe-west1.firebasedatabase.app/"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:689674668259:android:9266a25c110840cd3b1dd6",
+        "android_client_info": {
+          "package_name": "com.jopek.pai_fillo_nai.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "689674668259-k337s6qqt2qkbtkifan7epe9mg56krqu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBj-bcz6LnUK0cfnSFZ8ySKbg404qjY_7M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "689674668259-k337s6qqt2qkbtkifan7epe9mg56krqu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
