@@ -15,11 +15,12 @@ import android.widget.TextView;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-//import com.google.firebase.database.DataSnapshot;
-//import com.google.firebase.database.DatabaseError;
-//import com.google.firebase.database.DatabaseReference;
-//import com.google.firebase.database.FirebaseDatabase;
-//import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -38,8 +39,8 @@ public class OnlineGameActivity extends AppCompatActivity {
             Arrays.asList(-1L, -1L, -1L, -1L, -1L, -1L, -1L, -1L, -1L)
     );
     List<ImageView> squares = new ArrayList<>();
-//    DatabaseReference rooms;
-//    DatabaseReference room;
+    DatabaseReference rooms;
+    DatabaseReference room;
     // FinishGameAlert
     AlertDialog fgAlert = null;
     long whoami = 0;
@@ -48,7 +49,7 @@ public class OnlineGameActivity extends AppCompatActivity {
     boolean revengeRequested = false;
     String TAG = "maks";
     ImageView p0Img;
-    ImageView p1Img;
+    //ImageView p1Img;
     ImageView square0, square1, square2, square3, square4, square5, square6, square7, square8;
     TextView tvName;
 
@@ -59,9 +60,10 @@ public class OnlineGameActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_online_game);
+        FirebaseApp.initializeApp(this);
 
         p0Img = findViewById(R.id.p0Img);
-        p1Img = findViewById(R.id.p1Img);
+        //p1Img = findViewById(R.id.p1Img);
         tvName = findViewById(R.id.onPlayerName);
 
         square0 = findViewById(R.id.square0);
@@ -80,7 +82,7 @@ public class OnlineGameActivity extends AppCompatActivity {
             square.setOnClickListener(view -> onSquareClick((ImageView) view, finalI));
             i++;
         }
-//        rooms = FirebaseDatabase.getInstance("https://pai-fillo-nai-default-rtdb.europe-west1.firebasedatabase.app/").getReference("rooms");
+        rooms = FirebaseDatabase.getInstance("https://pai-fillo-nai-default-rtdb.europe-west1.firebasedatabase.app/").getReference("rooms");
 
         askForRoomId(false);
     }
@@ -114,7 +116,7 @@ public class OnlineGameActivity extends AppCompatActivity {
             whoami = rand.nextInt(2);
             tvName.setText("You're player 1 (playing as " + (whoami == 0 ? "O" : "X") + ")");
 
-//            room = rooms.child(rid);
+            room = rooms.child(rid);
             Map<String, Object> data = new HashMap<>();
             data.put("started", 0);
             data.put("player1", whoami);
@@ -124,32 +126,32 @@ public class OnlineGameActivity extends AppCompatActivity {
             data.put("winner", -1);
             data.put("revenge0", -1);
             data.put("revenge1", -1);
-//            room.setValue(data);
+            room.setValue(data);
 
             waitFor2Player(rid);
         } else {
-//            rooms.child(roomId).addListenerForSingleValueEvent(new ValueEventListener() {
-//                @Override
-//                public void onDataChange(DataSnapshot dataSnapshot) {
-//                    if (!(dataSnapshot.getValue() instanceof HashMap)) {
-//                        askForRoomId(true);
-//                    }
-//                    HashMap data = (HashMap) dataSnapshot.getValue();
-//                    if ((long) data.get("started") == 1) {
-//                        askForRoomId(true);
-//                    }
-//                    whoami = (long) data.get("player2");
-//                    whoseTurn = (long) data.get("whoseTurn");
-//                    tvName.setText("You're player 1 (playing as " + (whoami == 0 ? "O" : "X") + ")");
-//                    room = rooms.child(roomId);
-//                    startGame(true);
-//                }
-//
-//                @Override
-//                public void onCancelled(DatabaseError databaseError) {
-//                    askForRoomId(true);
-//                }
-//            });
+            rooms.child(roomId).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (!(dataSnapshot.getValue() instanceof HashMap)) {
+                        askForRoomId(true);
+                    }
+                    HashMap data = (HashMap) dataSnapshot.getValue();
+                    if ((long) data.get("started") == 1) {
+                        askForRoomId(true);
+                    }
+                    whoami = (long) data.get("player2");
+                    whoseTurn = (long) data.get("whoseTurn");
+                    tvName.setText("You're player 1 (playing as " + (whoami == 0 ? "O" : "X") + ")");
+                    room = rooms.child(roomId);
+                    startGame(true);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    askForRoomId(true);
+                }
+            });
         }
     }
 
@@ -163,92 +165,92 @@ public class OnlineGameActivity extends AppCompatActivity {
         alert.show();
         alert.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
 
-//        room.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                HashMap data = (HashMap) dataSnapshot.getValue();
-//                if ((long) data.get("started") == 1) {
-//                    room.removeEventListener(this);
-//                    alert.dismiss();
-//                    startGame(false);
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//                Log.d(TAG, "onCancelled: Waiter Value Event Listener");
-//            }
-//        });
+        room.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                HashMap data = (HashMap) dataSnapshot.getValue();
+                if ((long) data.get("started") == 1) {
+                    room.removeEventListener(this);
+                    alert.dismiss();
+                    startGame(false);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.d(TAG, "onCancelled: Waiter Value Event Listener");
+            }
+        });
     }
 
-//    protected void startGame(boolean markStarted) {
-//        if (markStarted) {
-//            room.child("started").setValue(1);
-//        }
-//        room.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                HashMap data = (HashMap) dataSnapshot.getValue();
-//                if (data == null) {
-//                    room.removeEventListener(this);
-//                    return;
-//                }
-//
-//                Log.d(TAG, "onDataChange: " + Arrays.toString(data.entrySet().toArray()));
-//                gameBoard = (List) data.get("board");
-//                Log.d(TAG, "onDataChange: " + Arrays.toString(gameBoard.toArray()));
-//                whoseTurn = (long) data.get("whoseTurn");
-//                myTurn = whoseTurn == whoami;
-//                playTurn();
-//                long winner = (long) data.get("winner");
-//                long opRevenge = (long) data.get("revenge" + (whoami == 0 ? 1 : 0));
-//                revengePossible = opRevenge != 0;
-//                if (revengeRequested && winner == -1) {
-//                    myTurn = whoami == (long) data.get("whoseTurn");
-//                    revengePossible = true;
-//                    revengeRequested = false;
-//                    gameWasEnd = false;
-//                    playTurn();
-//                } else if (!revengePossible && revengeRequested) {
-//                    fgAlert.dismiss();
-//                    new AlertDialog.Builder(OnlineGameActivity.this)
-//                            .setTitle("Sad info")
-//                            .setMessage("Second player don't want to play with ya :(")
-//                            .setCancelable(false)
-//                            .setNegativeButton("Go to menu without friend", (dialog, which) -> {
-//                                room.removeValue();
-//                                Intent intent = new Intent(OnlineGameActivity.this, MainActivity.class);
-//                                startActivity(intent);
-//                            })
-//                            .setIcon(R.drawable.ic_baseline_gamepad_24)
-//                            .show();
-//                } else if (opRevenge == 1 && revengeRequested) {
-//                    Map<String, Object> data2 = new HashMap<>();
-//                    gameBoard = new ArrayList<>(Arrays.asList(-1L, -1L, -1L, -1L, -1L, -1L, -1L, -1L, -1L));
-//                    data2.put("started", 1);
-//                    data2.put("player1", whoami);
-//                    data2.put("player2", whoami == 0 ? 1L : 0L);
-//                    data2.put("whoseTurn", new Long(ThreadLocalRandom.current().nextInt(0, 1 + 1)));
-//                    data2.put("board", gameBoard);
-//                    data2.put("winner", -1L);
-//                    data2.put("revenge0", -1L);
-//                    data2.put("revenge1", -1L);
-//                    myTurn = whoami == (long) data2.get("whoseTurn");
-//                    room.setValue(data2);
-//                    playTurn();
-//                }
-//
-//                if (winner != -1) {
-//                    endGame(winner);
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//                Log.d(TAG, "onCancelled: Main Value Event Listener");
-//            }
-//        });
-//    }
+    protected void startGame(boolean markStarted) {
+        if (markStarted) {
+            room.child("started").setValue(1);
+        }
+        room.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                HashMap data = (HashMap) dataSnapshot.getValue();
+                if (data == null) {
+                    room.removeEventListener(this);
+                    return;
+                }
+
+                Log.d(TAG, "onDataChange: " + Arrays.toString(data.entrySet().toArray()));
+                gameBoard = (List) data.get("board");
+                Log.d(TAG, "onDataChange: " + Arrays.toString(gameBoard.toArray()));
+                whoseTurn = (long) data.get("whoseTurn");
+                myTurn = whoseTurn == whoami;
+                playTurn();
+                long winner = (long) data.get("winner");
+                long opRevenge = (long) data.get("revenge" + (whoami == 0 ? 1 : 0));
+                revengePossible = opRevenge != 0;
+                if (revengeRequested && winner == -1) {
+                    myTurn = whoami == (long) data.get("whoseTurn");
+                    revengePossible = true;
+                    revengeRequested = false;
+                    gameWasEnd = false;
+                    playTurn();
+                } else if (!revengePossible && revengeRequested) {
+                    fgAlert.dismiss();
+                    new AlertDialog.Builder(OnlineGameActivity.this)
+                            .setTitle("Sad info")
+                            .setMessage("Second player don't want to play with ya :(")
+                            .setCancelable(false)
+                            .setNegativeButton("Go to menu without friend", (dialog, which) -> {
+                                room.removeValue();
+                                Intent intent = new Intent(OnlineGameActivity.this, MainActivity.class);
+                                startActivity(intent);
+                            })
+                            .setIcon(R.drawable.ic_baseline_gamepad_24)
+                            .show();
+                } else if (opRevenge == 1 && revengeRequested) {
+                    Map<String, Object> data2 = new HashMap<>();
+                    gameBoard = new ArrayList<>(Arrays.asList(-1L, -1L, -1L, -1L, -1L, -1L, -1L, -1L, -1L));
+                    data2.put("started", 1);
+                    data2.put("player1", whoami);
+                    data2.put("player2", whoami == 0 ? 1L : 0L);
+                    data2.put("whoseTurn", new Long(ThreadLocalRandom.current().nextInt(0, 1 + 1)));
+                    data2.put("board", gameBoard);
+                    data2.put("winner", -1L);
+                    data2.put("revenge0", -1L);
+                    data2.put("revenge1", -1L);
+                    myTurn = whoami == (long) data2.get("whoseTurn");
+                    room.setValue(data2);
+                    playTurn();
+                }
+
+                if (winner != -1) {
+                    endGame(winner);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.d(TAG, "onCancelled: Main Value Event Listener");
+            }
+        });
+    }
 
     protected void playTurn() {
         int i = 0;
@@ -270,8 +272,8 @@ public class OnlineGameActivity extends AppCompatActivity {
     }
 
     protected void finishTurn() {
-//        room.child("whoseTurn").setValue(whoseTurn);
-//        room.child("board").setValue(gameBoard);
+        room.child("whoseTurn").setValue(whoseTurn);
+        room.child("board").setValue(gameBoard);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -319,26 +321,26 @@ public class OnlineGameActivity extends AppCompatActivity {
         gameWasEnd = true;
 
         finishTurn();
-//        room.child("winner").setValue(whoWon);
-//        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this)
-//                .setTitle(whoWon == 2 ? "DRAW" : "Player " + (whoWon + 1) + " WON")
-//                .setMessage(whoWon == 2 ? "Maybe next time" : "Congratulations to Player " + (whoWon + 1))
-//                .setCancelable(false)
-//                .setPositiveButton("Request revenge", (dialog, which) -> {
-//                    revengeRequested = true;
-//                    room.child("revenge" + whoami).setValue(1);
-//                })
-//                .setNegativeButton("Go to menu", (dialog, which) -> {
-//                    room.child("revenge" + whoami).setValue(0);
-//                    if (!revengePossible) {
-//                        room.removeValue();
-//                    }
-//                    Intent intent = new Intent(OnlineGameActivity.this, MainActivity.class);
-//                    startActivity(intent);
-//                })
-//                .setIcon(R.drawable.ic_baseline_gamepad_24);
-//        fgAlert = alertBuilder.create();
-//        fgAlert.show();
+        room.child("winner").setValue(whoWon);
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this)
+                .setTitle(whoWon == 2 ? "DRAW" : "Player " + (whoWon + 1) + " WON")
+                .setMessage(whoWon == 2 ? "Maybe next time" : "Congratulations to Player " + (whoWon + 1))
+                .setCancelable(false)
+                .setPositiveButton("Request revenge", (dialog, which) -> {
+                    revengeRequested = true;
+                    room.child("revenge" + whoami).setValue(1);
+                })
+                .setNegativeButton("Go to menu", (dialog, which) -> {
+                    room.child("revenge" + whoami).setValue(0);
+                    if (!revengePossible) {
+                        room.removeValue();
+                    }
+                    Intent intent = new Intent(OnlineGameActivity.this, MainActivity.class);
+                    startActivity(intent);
+                })
+                .setIcon(R.drawable.ic_baseline_gamepad_24);
+        fgAlert = alertBuilder.create();
+        fgAlert.show();
     }
 
     // CheckTripleEqualityOnGameBoard

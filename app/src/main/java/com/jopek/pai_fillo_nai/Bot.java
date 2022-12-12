@@ -1,5 +1,7 @@
 package com.jopek.pai_fillo_nai;
 
+import android.os.Build;
+
 import java.util.Arrays;
 
 public class Bot {
@@ -38,7 +40,7 @@ public class Bot {
         if (score == -10)
             return score;
 
-        if (isntBoardFull() == false)
+        if (!isntBoardFull())
             return 0;
 
         int best;
@@ -73,7 +75,9 @@ public class Bot {
         int bestVal = -1000;
         int bestMove = -1;
 
-        if(Arrays.stream(board).filter(c -> c == -1).count() == 9) return 4;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            if(Arrays.stream(board).filter(c -> c == -1).count() == 9) return 4;
+        }
 
         for (int i = 0; i < board.length; i++) {
             if (board[i] == -1) {
