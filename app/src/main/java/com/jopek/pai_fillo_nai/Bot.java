@@ -77,6 +77,12 @@ public class Bot {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             if(Arrays.stream(board).filter(c -> c == -1).count() == 9) return 4;
+        } else {
+            int count = 0;
+            for (int c : board) {
+                if(c == -1)  count++;
+            }
+            if(count == 9) return 4;
         }
 
         for (int i = 0; i < board.length; i++) {
