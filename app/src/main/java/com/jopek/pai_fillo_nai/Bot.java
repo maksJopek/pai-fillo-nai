@@ -34,6 +34,8 @@ public class Bot {
     static int minimax(int depth, Boolean isMax) {
         int score = goodOrBad();
 
+        if (score == 10 && depth < 2)
+            return score * 100_000;
         if (score == 10)
             return score;
 
@@ -61,6 +63,7 @@ public class Bot {
                 if (board[i] == -1) {
                     board[i] = opponent;
                     best = Math.min(best, minimax(depth + 1, !isMax));
+
                     board[i] = -1;
                 }
             }

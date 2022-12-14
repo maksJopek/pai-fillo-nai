@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -141,6 +142,7 @@ public class OfflineGameActivity extends AppCompatActivity {
     }
 
     protected void onSquareClick(TextView square, int id, boolean force) {
+        Log.d(TAG, "onSquareClick: " + botTurn + " " + force);
         if (botTurn && !force) return;
         if (gameBoard[id] != -1) return;
         gameBoard[id] = whoseTurn;
@@ -170,7 +172,8 @@ public class OfflineGameActivity extends AppCompatActivity {
         int chosenSquare = -1;
         chosenSquare = Bot.getBestMove(gameBoard.clone(), playerIs == 0 ? 1 : 0, playerIs);
         onSquareClick(squares[chosenSquare], chosenSquare, true);
-        botTurn = false;
+        if (!checkWon())
+            botTurn = false;
     }
 
     protected boolean checkWon() {

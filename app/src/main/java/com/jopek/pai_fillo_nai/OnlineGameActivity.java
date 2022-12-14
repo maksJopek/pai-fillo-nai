@@ -38,7 +38,7 @@ public class OnlineGameActivity extends AppCompatActivity {
     List<Long> gameBoard = new ArrayList<>(
             Arrays.asList(-1L, -1L, -1L, -1L, -1L, -1L, -1L, -1L, -1L)
     );
-    List<ImageView> squares = new ArrayList<>();
+    List<TextView> squares = new ArrayList<>();
     DatabaseReference rooms;
     DatabaseReference room;
     // FinishGameAlert
@@ -50,7 +50,7 @@ public class OnlineGameActivity extends AppCompatActivity {
     String TAG = "maks";
     ImageView p0Img;
     //ImageView p1Img;
-    ImageView square0, square1, square2, square3, square4, square5, square6, square7, square8;
+    TextView square0, square1, square2, square3, square4, square5, square6, square7, square8;
     TextView tvName;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -77,9 +77,9 @@ public class OnlineGameActivity extends AppCompatActivity {
         square8 = findViewById(R.id.square8);
         squares.addAll(Arrays.asList(square0, square1, square2, square3, square4, square5, square6, square7, square8));
         int i = 0;
-        for (ImageView square : squares) {
+        for (TextView square : squares) {
             int finalI = i;
-            square.setOnClickListener(view -> onSquareClick((ImageView) view, finalI));
+            square.setOnClickListener(view -> onSquareClick((TextView) view, finalI));
             i++;
         }
         rooms = FirebaseDatabase.getInstance("https://pai-fillo-nai-default-rtdb.europe-west1.firebasedatabase.app/").getReference("rooms");
@@ -254,13 +254,16 @@ public class OnlineGameActivity extends AppCompatActivity {
 
     protected void playTurn() {
         int i = 0;
-        for (ImageView square : squares) {
+        for (TextView square : squares) {
             if (gameBoard.get(i) == -1) {
-                square.setImageResource(R.mipmap.emptiness_foreground);
+//                square.setImageResource(R.mipmap.emptiness_foreground);
+                square.setText("");
             } else if (gameBoard.get(i) == 0) {
-                square.setImageResource(R.mipmap.bg_o_foreground);
+//                square.setImageResource(R.mipmap.bg_o_foreground);
+                square.setText("O");
             } else if (gameBoard.get(i) == 1) {
-                square.setImageResource(R.mipmap.bg_x_foreground);
+//                square.setImageResource(R.mipmap.bg_x_foreground);
+                square.setText("X");
             }
             i++;
         }
@@ -277,10 +280,10 @@ public class OnlineGameActivity extends AppCompatActivity {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    protected void onSquareClick(ImageView square, int id) {
+    protected void onSquareClick(TextView square, int id) {
         if (gameBoard.get(id) != -1 || !myTurn) return;
         gameBoard.set(id, whoseTurn);
-        square.setImageResource(whoseTurn == 0 ? R.mipmap.bg_o_foreground : R.mipmap.bg_x_foreground);
+        square.setText(whoseTurn == 0 ? "O" : "X");
         if (checkWon()) {
             endGame(whoseTurn);
             return;
